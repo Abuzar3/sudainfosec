@@ -58,7 +58,8 @@ def sql_injection_scan(url):
                     data[input_tag["name"]] = input_tag["value"] + c
                 elif input_tag["type"] != "submit":
                     data[input_tag["name"]] = f"test{c}"
-            url = urljoin(url, form_details["action"])
+            action = form_details(form)
+            url = urljoin(url, action["action"])
 
             if details["method"] == "post":
                 res = requests.session().post(url, data=data)
@@ -72,5 +73,5 @@ def sql_injection_scan(url):
 
 
 if __name__ == "__main__":
-    url_arg = "https://suna-sd.net/"
+    url_arg = input('Inter website url\n')
     sql_injection_scan(url_arg)
